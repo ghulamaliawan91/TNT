@@ -1,87 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Purchase Tracker</title>
-
-    <!-- External Fonts & Icons -->
+    <title>PurchasePro Tracker</title>
+    
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Chart Library for Graphs -->
+    <!-- Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <!-- Firebase SDKs (Compat Version for easier use) -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-
-    <!-- Link to our CSS File (Path Corrected) -->
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="csss/style.css">
     <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+    <link rel="manifest" href="manifest.json">
 </head>
-
 <body>
 
-    <!-- === AUTHENTICATION SECTION (Login/Signup) === --->
-    <div id="auth-container" class="container auth-box">
+    <!-- SCREEN 1: LOGIN / SIGNUP -->
+    <div id="auth-screen" class="container auth-box">
         <div class="auth-header">
             <div class="logo-icon"><i class="fa-solid fa-cube"></i></div>
             <h1 id="auth-title">Welcome Back</h1>
-            <p>Login to track your expenses</p>
+            <p id="auth-subtitle">Login to track your expenses</p>
         </div>
-
-<!-- Password Input ke neche ye line lagayein -->
-<a href="#" onclick="showResetPassword()" style="font-size:0.85rem; color:var(--primary); display:block; margin-bottom:1rem; text-decoration:none;">
-    Forgot Password?
-</a>
-
-<!-- Reset Password View (Hidden by default) -->
-<div id="reset-view" class="container auth-box hidden" style="text-align: center;">
-    <div class="auth-header">
-        <div class="logo-icon"><i class="fa-solid fa-key"></i></div>
-        <h1>Reset Password</h1>
-        <p>Apna email likhein, hum aapko reset link bhejeinge.</p>
-    </div>
-
-    <div class="input-group">
-        <label>Email Address</label>
-        <input type="email" id="reset-email" placeholder="name@example.com">
-    </div>
-
-    <button onclick="sendResetEmail()" class="btn btn-primary btn-full">Send Reset Link</button>
-    
-    <div class="auth-switch">
-        <a href="#" onclick="showLogin()" style="color:var(--primary);">Back to Login</a>
-    </div>
-</div>
 
         <form id="auth-form" onsubmit="handleAuth(event)">
             <div class="input-group">
-                <label>Email</label> <!-- Changed label to Email -->
-                <input type="email" id="username" required placeholder="name@example.com"> <!-- Changed type to email -->
+                <label>Email</label>
+                <input type="email" id="username" required placeholder="name@example.com">
             </div>
             <div class="input-group">
                 <label>Password</label>
                 <input type="password" id="password" required placeholder="Enter password">
             </div>
+            
             <button type="submit" class="btn btn-primary btn-full" id="auth-btn">Login</button>
         </form>
 
+        <div class="links-row">
+            <a href="#" onclick="showResetScreen()" class="text-link">Forgot Password?</a>
+        </div>
+
         <div class="auth-switch">
             <span id="switch-text">Don't have an account? </span>
-            <a href="#" onclick="toggleAuthMode()" id="switch-link">Sign Up</a>
+            <a href="#" onclick="toggleAuthMode()" id="switch-link" class="text-link">Sign Up</a>
         </div>
     </div>
 
-    <!-- === DASHBOARD SECTION (Main App) === -->
-    <div id="app-container" class="app-layout hidden">
-        <!-- Navbar -->
+    <!-- SCREEN 2: RESET PASSWORD -->
+    <div id="reset-screen" class="container auth-box hidden">
+        <div class="auth-header">
+            <div class="logo-icon"><i class="fa-solid fa-key"></i></div>
+            <h1>Reset Password</h1>
+            <p>Enter your email to receive a reset link.</p>
+        </div>
+
+        <div class="input-group">
+            <label>Email Address</label>
+            <input type="email" id="reset-email" placeholder="name@example.com">
+        </div>
+
+        <button onclick="sendResetEmail()" class="btn btn-primary btn-full">Send Reset Link</button>
+        
+        <div class="auth-switch">
+            <a href="#" onclick="showAuthScreen()" class="text-link">Back to Login</a>
+        </div>
+    </div>
+
+    <!-- SCREEN 3: DASHBOARD -->
+    <div id="app-screen" class="app-layout hidden">
         <header class="navbar">
-            <div class="nav-brand">
-                <i class="fa-solid fa-cube"></i> PurchasePro
-            </div>
+            <div class="nav-brand"><i class="fa-solid fa-cube"></i> PurchasePro</div>
             <div class="nav-user">
                 <span id="user-display">User</span>
                 <button onclick="logout()" class="btn-icon"><i class="fa-solid fa-power-off"></i></button>
@@ -89,7 +83,7 @@
         </header>
 
         <main class="main-content">
-            <!-- Add Item Card -->
+            <!-- Add Item -->
             <section class="card">
                 <h3><i class="fa-solid fa-plus-circle"></i> Add New Item</h3>
                 <div class="form-grid">
@@ -122,7 +116,7 @@
                 </button>
             </section>
 
-            <!-- Analytics Card -->
+            <!-- Analytics -->
             <section class="card">
                 <div class="card-header">
                     <h3><i class="fa-solid fa-chart-pie"></i> Spending Analytics</h3>
@@ -132,7 +126,7 @@
                 </div>
             </section>
 
-            <!-- History List -->
+            <!-- History -->
             <section class="card">
                 <div class="card-header">
                     <h3>Purchase History</h3>
@@ -141,22 +135,16 @@
                         <button onclick="loadData()" class="btn-small"><i class="fa-solid fa-rotate-right"></i> Refresh</button>
                     </div>
                 </div>
-                
-                <!-- Search Bar -->
                 <div class="input-group">
                     <input type="text" id="search-input" placeholder="🔍 Search items..." onkeyup="filterData()">
                 </div>
-
                 <div id="history-list">
-                    <!-- Items will load here -->
                     <div class="empty-state">Loading data...</div>
                 </div>
             </section>
         </main>
     </div>
 
-    <!-- Link to our JS File -->
     <script src="js/script.js"></script>
 </body>
-
 </html>
