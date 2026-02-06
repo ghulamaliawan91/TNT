@@ -171,3 +171,27 @@ function downloadCSV() {
     link.download = "expenses.csv";
     link.click();
 }
+// یہ فنکشن آپ کی JS فائل میں جائے گا
+function downloadPDF() {
+    // شرط (Condition): اگر ڈیٹا نہیں ہے تو الرٹ دکھائیں
+    if (globalData.length === 0) return alert("No data to export");
+
+    // منطقی تبدیلی (Logical Adjustment for External JS)
+    const { jsPDF } = window.jspdf; 
+    const doc = new jsPDF();
+
+    // ڈیٹا کو ٹیبل کی قطاروں میں تبدیل کرنا (Process)
+    const tableRows = globalData.map(r => [r.date, r.itemName, r.category, r.price]);
+
+    // ٹیبل ڈیزائن اور ہیڈنگ
+    doc.text("Expense Report", 14, 15);
+    
+    doc.autoTable({
+        head: [["Date", "Item", "Category", "Price"]],
+        body: tableRows,
+        startY: 20,
+    });
+
+    // فائل محفوظ کرنا (Output)
+    doc.save("expenses.pdf");
+}

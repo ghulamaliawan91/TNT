@@ -13,7 +13,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-    
+    <!-- pdf link  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="csss/style.css">
     <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
@@ -87,12 +89,7 @@
             <section class="card">
                 <h3><i class="fa-solid fa-plus-circle"></i> Add New Item</h3>
                 <div class="form-grid">
-                    <div class="input-group">
-                        <label>چکن</label>
-                        <label>مٹن</label>
-                        <label>آئل</label>
-                        <label>پیاز</label>
-                        <label>چاول</label>
+                    <div class="input-group">               
                         <label>Item Name</label>
                         <input type="text" id="item-name" placeholder="e.g. Lunch">
                     </div>
@@ -137,6 +134,8 @@
                     <h3>Purchase History</h3>
                     <div style="display:flex; gap:10px;">
                         <button onclick="downloadCSV()" class="btn-small"><i class="fa-solid fa-file-csv"></i> Export</button>
+                        <button onclick="downloadpdf()" class="btn-small"><i class="fa-solid fa-file-pdf"></i> Export PDF</button>
+
                         <button onclick="loadData()" class="btn-small"><i class="fa-solid fa-rotate-right"></i> Refresh</button>
                     </div>
                 </div>
