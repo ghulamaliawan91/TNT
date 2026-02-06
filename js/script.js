@@ -1,3 +1,6 @@
+
+// --- CONFIGURATION ---
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw-7FP9Tt8QeKlHa2-kV2GL7Sg5OGWIUfS6NnPraHbECgxETGdCwLbL0H3UwiL_4mOEhQ/exec"; 
 const firebaseConfig = {
   apiKey: "AIzaSyCgmfHwjKiz_I5SsXy3hmxjZiBfJifKvYY",
   authDomain: "tnng-6ac48.firebaseapp.com",
@@ -6,16 +9,6 @@ const firebaseConfig = {
   messagingSenderId: "745274397704",
   appId: "1:745274397704:web:1173c7935fd1ebec5aedbd",
   measurementId: "G-CMR5CW8F71"
-};
-// --- CONFIGURATION ---
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw-7FP9Tt8QeKlHa2-kV2GL7Sg5OGWIUfS6NnPraHbECgxETGdCwLbL0H3UwiL_4mOEhQ/exec"; 
-const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "...",
-    appId: "..."
 };
 
 // --- INIT ---
