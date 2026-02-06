@@ -140,7 +140,7 @@ function renderList(data) {
                     <span style="font-weight:500">${item.itemName}</span>
                     <span class="cat-badge">${item.category}</span>
                 </div>
-                <div style="font-weight:700; color:var(--success)">$${item.price}</div>
+                <div style="font-weight:700; color:var(--success)">BD${item.price}</div>
             </div>`;
     });
     list.innerHTML = html;
